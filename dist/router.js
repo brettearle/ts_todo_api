@@ -9,18 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.router = void 0;
+exports.TodoRouter = void 0;
 const express_1 = require("express");
-const router = (0, express_1.Router)();
-exports.router = router;
-router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const todoRouter = (0, express_1.Router)();
+exports.TodoRouter = todoRouter;
+todoRouter.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.send("im the get route");
 }));
-router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+todoRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.body);
     res.send(`this is the post`);
 }));
-router.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+todoRouter.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = Number(req.query.id);
     isNaN(id) === false
         ? res.send(`this is the get by id route ${id}`)

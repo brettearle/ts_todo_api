@@ -1,10 +1,10 @@
 import express from "express";
 import { Application } from "express";
-import { router } from "./router";
+import { TodoRouter } from "./router";
 
 const app: Application = express();
 
-const todoRouter = router;
+const todoRouter = TodoRouter;
 
 app.use("/", todoRouter);
 
