@@ -6,6 +6,7 @@ const todoRouter = Router();
 const todoService = TodoService;
 
 todoRouter.get("/", async (req: Request, res: Response) => {
+  console.log(await todoService.getAllTodo());
   res.send(todoService.getAllTodo());
 });
 
@@ -14,11 +15,14 @@ todoRouter.post("/", async (req: Request, res: Response) => {
   res.send(todoService.createATodo());
 });
 
-todoRouter.get("/:id", async (req: Request, res: Response) => {
-  const id: number = Number(req.query.id);
-  isNaN(id) === false
-    ? res.send(todoService.getTodoById(id))
-    : res.send("not found");
+todoRouter.get("/findById", async (req: Request, res: Response) => {
+  //still need to handle if id is entered but isnt in format that mongo accepts
+  const id = req.query.id?.toString();
+  let todo: any;
+  id !== undefined
+    ? (todo = await todoService.getTodoById(id))
+    : (todo = "not found");
+  res.send(todo);
 });
 
 export { todoRouter as TodoRouter };

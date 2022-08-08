@@ -1,10 +1,10 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 
-const uri =
-  process.env.DB_STR !== undefined ? process.env.DB_STR : "no db str defined";
+const uri = process.env.DB_STR ? process.env.DB_STR : "";
 
-let mongodb;
+let mongodb: any;
 function connectDB(): void {
+  console.log(uri);
   MongoClient.connect(uri, (err, client) => {
     if (err) throw err;
     mongodb = client?.db("todos");
@@ -12,4 +12,12 @@ function connectDB(): void {
   });
 }
 
-export { connectDB };
+function getDB() {
+  return mongodb;
+}
+
+function MongoObjectID(id: string) {
+  return new ObjectId(id);
+}
+
+export { connectDB, getDB, MongoObjectID };
