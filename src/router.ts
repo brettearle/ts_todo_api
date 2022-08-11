@@ -12,7 +12,10 @@ todoRouter.get("/", async (req: Request, res: Response) => {
 
 todoRouter.post("/", async (req: Request, res: Response) => {
   console.log(req.body);
-  res.send(todoService.createATodo());
+  const obj = req.body;
+  const todo = await todoService.createATodo(obj);
+  console.log(todo);
+  res.send(todo);
 });
 
 todoRouter.get("/findById", async (req: Request, res: Response) => {
