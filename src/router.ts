@@ -20,28 +20,22 @@ todoRouter.post("/", async (req: Request, res: Response) => {
 
 todoRouter.get("/findById", async (req: Request, res: Response) => {
   //still need to handle if id is entered but isnt in format that mongo accepts
-  const id = req.query.id?.toString();
-  let todo: any;
-  id !== undefined
-    ? (todo = await todoService.getTodoById(id))
-    : (todo = "not found");
+  const id = req.body._id;
+  const todo = await todoService.getTodoById(id);
   res.send(todo);
 });
 
-todoRouter.put("/update", async (req: Request, res: Response) => {
+todoRouter.put("/", async (req: Request, res: Response) => {
   const id = req.body._id;
   const data = req.body;
   const todo = await todoService.updateATodo(id, data);
   res.send(todo);
 });
 
-todoRouter.delete("/delete", async (req: Request, res: Response) => {
+todoRouter.delete("/", async (req: Request, res: Response) => {
   //still need to handle if id is entered but isnt in format that mongo accepts
   const id = req.body._id;
-  let todo: any;
-  id !== undefined
-    ? (todo = await todoService.deleteTodo(id))
-    : (todo = "not found");
+  const todo = await todoService.deleteTodo(id);
   res.send(todo);
 });
 
