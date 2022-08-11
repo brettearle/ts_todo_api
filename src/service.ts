@@ -33,6 +33,13 @@ const todoService = {
       );
     return todo.value;
   },
+
+  deleteTodo: async function deleteTodoById(id: string) {
+    const todo = await getDB()
+      .collection("todo")
+      .deleteOne({ _id: MongoObjectID(id) });
+    return todo;
+  },
 };
 
 export { todoService as TodoService };
