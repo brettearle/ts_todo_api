@@ -28,4 +28,12 @@ todoRouter.get("/findById", async (req: Request, res: Response) => {
   res.send(todo);
 });
 
+todoRouter.put("/update", async (req: Request, res: Response) => {
+  const id = req.body._id;
+  const data = req.body;
+  console.log(req.body);
+  const todo = await todoService.updateATodo(id, data);
+  res.send(todo);
+});
+
 export { todoRouter as TodoRouter };

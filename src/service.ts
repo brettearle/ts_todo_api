@@ -21,6 +21,18 @@ const todoService = {
     await getDB().collection("todo").insertOne(todo);
     return todo;
   },
+
+  updateATodo: async function updateTodo(id: string, data: Todo) {
+    const idMongo = MongoObjectID(id);
+    const todo = await getDB()
+      .collection("todo")
+      .findOneAndUpdate(
+        { _id: idMongo },
+        { $set: { title: data.title, completed: data.completed } },
+        { upsert: true, returnDocument: "after" }
+      );
+    return todo.value;
+  },
 };
 
 export { todoService as TodoService };
