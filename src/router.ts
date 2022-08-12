@@ -6,15 +6,13 @@ const todoRouter = Router();
 const todoService = TodoService;
 
 todoRouter.get("/", async (req: Request, res: Response) => {
-  console.log(await todoService.getAllTodo());
-  res.send(todoService.getAllTodo());
+  const todos = await todoService.getAllTodo();
+  res.send(todos);
 });
 
 todoRouter.post("/", async (req: Request, res: Response) => {
-  console.log(req.body);
   const obj = req.body;
   const todo = await todoService.createATodo(obj);
-  console.log(todo);
   res.send(todo);
 });
 
